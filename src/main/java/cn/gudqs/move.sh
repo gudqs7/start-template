@@ -1,0 +1,42 @@
+#!/bin/bash
+FROM=$1
+TO=$2
+CLASSNAME=$3
+
+if [ $# != 3 ]
+then
+   echo 'Useage: ./move.sh <fromPkg> <toPkg> <businessName>'
+   exit
+fi
+
+MODELNAME=entity/$CLASSNAME'Model.java'
+ls $FROM/$MODELNAME
+
+DAONAME=mapper/$CLASSNAME'Mapper.java'
+ls $FROM/$DAONAME
+
+DAOIMPLNAME=dao/impl/$CLASSNAME'DaoImpl.java'
+ls $FROM/$DAOIMPLNAME
+
+SERVICENAME=service/I$CLASSNAME'Service.java'
+ls $FROM/$SERVICENAME
+
+SERVICEIMPLNAME=service/impl/$CLASSNAME'ServiceImpl.java'
+ls $FROM/$SERVICEIMPLNAME
+
+CONTROLLERNAME=web/$CLASSNAME'Controller.java'
+ls $FROM/$CONTROLLERNAME
+
+mkdir -p $TO/mapper
+mkdir -p $TO/service/impl
+mkdir -p $TO/entity
+mkdir -p $TO/web
+
+mv $FROM/$MODELNAME $TO/$MODELNAME
+mv $FROM/$DAONAME $TO/$DAONAME
+#mv $FROM/$DAOIMPLNAME $TO/$DAOIMPLNAME
+mv $FROM/$SERVICENAME $TO/$SERVICENAME
+mv $FROM/$SERVICEIMPLNAME $TO/$SERVICEIMPLNAME
+mv $FROM/$CONTROLLERNAME $TO/$CONTROLLERNAME
+
+sed -i "" "s/$FROM/$TO/g" $TO/$DAONAME $TO/$SERVICENAME $TO/$SERVICEIMPLNAME $TO/$CONTROLLERNAME $TO/$MODELNAME 

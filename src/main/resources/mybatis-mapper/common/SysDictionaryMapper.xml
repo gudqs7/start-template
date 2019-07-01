@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.gudqs.business.common.mapper.SysDictionaryMapper">
+
+    <resultMap id="result" type="cn.gudqs.business.common.entity.SysDictionaryModel"/>
+
+    <select id="findAll" resultMap="result">
+        SELECT *
+        FROM sys_dictionary
+    </select>
+
+    <select id="findByParentCode" resultMap="result">
+        SELECT
+            dictionaryId, parentId, dictionaryCode, dictionaryValue, dictionaryMemo, dictionaryType
+        FROM sys_dictionary
+        WHERE parentId = (
+            SELECT dictionaryId FROM sys_dictionary WHERE dictionaryCode = #{parentCode}
+        )
+        ORDER BY displayOrder DESC
+    </select>
+
+</mapper>

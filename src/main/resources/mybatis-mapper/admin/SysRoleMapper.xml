@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.gudqs.system.admin.mapper.SysRoleMapper">
+
+    <resultMap id="result" type="cn.gudqs.system.admin.entity.SysRoleModel"/>
+
+    <select id="findAll" resultMap="result">
+        SELECT sysRoleId, roleName, status
+        FROM sys_role
+    </select>
+
+    <select id="findBySysUserId" resultMap="result">
+        SELECT role.sysRoleId, role.roleName, role.status
+        FROM sys_role               role
+                 JOIN sys_user_role sur
+                      ON role.sysRoleId = sur.sysRoleId
+        WHERE sur.sysUserId = #{sysUserId}
+    </select>
+
+    <insert id="addRole">
+        INSERT INTO sys_user_role (sysUserId, sysRoleId)
+        SELECT
+            #{sysUserId},
+            #{sysRoleId}
+        FROM dual
+        WHERE NOT exists(
+                SELECT 0
+                FROM sys_user_role
+                WHERE sysRoleId = #{sysRoleId}
+                    AND sysUserId = #{sysUserId}
+            )
+    </insert>
+
+    <delete id="delRole">
+        DELETE
+        FROM sys_user_role
+        WHERE sysUserId = #{sysUserId}
+            AND sysRoleId = #{sysRoleId}
+    </delete>
+
+</mapper>

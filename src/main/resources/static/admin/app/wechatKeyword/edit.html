@@ -1,0 +1,117 @@
+<div class="my-box">
+    <form class="layui-form layui-form-pane1 banner-form" method="post" lay-filter="banner">
+        <div class="layui-form-item">
+            <label class="layui-form-label">关键词</label>
+            <div class="layui-input-block">
+                <input name="keyword" lay-verify="required"
+                       required
+                       maxlength="100"
+                       placeholder="请输入关键词"
+                       value="{{keyword}}"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">备注</label>
+            <div class="layui-input-block">
+                <input name="memo" lay-verify="required"
+                       required
+                       data-ok
+                       maxlength="100"
+                       placeholder="请输入备注"
+                       value="{{memo}}"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">匹配类型</label>
+            <div class="layui-input-block">
+                <select name="matchType" title="">
+                    <option value="1">完全等于</option>
+                    <option value="2">关键词包含输入</option>
+                    <option value="3">输入包含关键词</option>
+                    <option value="4">匹配扫码事件</option>
+                    <option value="5">匹配菜单点击及关注事件</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">回复类型</label>
+            <div class="layui-input-block">
+                <select name="replyType" title="" lay-filter="replyType">
+                    <option value="1">文本</option>
+                    <option value="3">图片</option>
+                    <option value="4">图文链接</option>
+                    <option value="5">小程序卡片</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item img-data" hidden>
+            <label class="layui-form-label">图片地址</label>
+            <div class="layui-input-block">
+                <input class="layui-input" value="{{replyData}}" name="imgUrl" title=""/>
+            </div>
+        </div>
+        <div class="layui-form-item text-data">
+            <label class="layui-form-label">文本内容</label>
+            <button type="button" class="layui-btn layui-btn-sm btn-insert-mini">插入小程序链接</button>
+            <div class="layui-input-block">
+                <textarea class="layui-textarea" style="height: 150px;" name="replyData"
+                          title="">{{replyData}}</textarea>
+            </div>
+        </div>
+        <div class="news-data" hidden>
+            <div class="layui-form-item">
+                <label class="layui-form-label">图文标题</label>
+                <div class="layui-input-block">
+                    <input class="layui-input" value="{{newsTitle}}" name="newsTitle" placeholder="请输入图文标题" title=""/>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">图文详细</label>
+                <div class="layui-input-block">
+                    <input class="layui-input" value="{{newsDesc}}" name="newsDesc" placeholder="请输入图文详细" title=""/>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">图文链接</label>
+                <div class="layui-input-block">
+                    <input class="layui-input" value="{{newsUrl}}" name="newsUrl" placeholder="请输入图文跳转链接" title=""/>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">图文图片</label>
+                <div class="layui-input-block">
+                    <input class="layui-input" value="{{newsPic}}" name="newsPic" placeholder="请输入图文缩略图地址" title=""/>
+                </div>
+            </div>
+        </div>
+        <div class="mini-data" hidden>
+            <div class="layui-form-item">
+                <label class="layui-form-label">卡片标题</label>
+                <div class="layui-input-block">
+                    <input class="layui-input" value="{{miniTitle}}" name="miniTitle" placeholder="请输入卡片标题" title=""/>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">卡片预览图</label>
+                <div class="layui-input-block">
+                    <input class="layui-input" value="{{miniPic}}" name="miniPic" placeholder="请输入卡片预览图地址" title=""/>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">小程序路径</label>
+                <div class="layui-input-block">
+                    <input class="layui-input" value="{{miniPath}}" name="miniPath" placeholder="请输入小程序路径" title=""/>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">小程序id</label>
+                <div class="layui-input-block">
+                    <input class="layui-input" value="{{miniAppId}}" name="miniAppId" placeholder="请输入小程序id" title=""/>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>

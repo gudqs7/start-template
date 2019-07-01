@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.gudqs.system.admin.mapper.SysAuthMapper">
+
+    <resultMap id="result" type="cn.gudqs.system.admin.entity.SysAuthModel"/>
+
+    <select id="findAll" resultMap="result">
+        SELECT sysAuthId, sysMenuId, code, method, url
+        FROM sys_auth
+    </select>
+
+    <select id="findBySysUserId" resultMap="result">
+        SELECT
+            DISTINCT auth.*
+        FROM sys_role_auth     sra
+                 JOIN sys_auth auth
+                      ON auth.sysAuthId = sra.sysAuthId
+        WHERE sra.sysRoleId IN (
+            SELECT sysRoleId
+            FROM sys_user_role
+            WHERE sysUserId = #{sysUserId}
+        )
+    </select>
+
+    <select id="findAuthByUrl" resultType="int">
+        SELECT
+            0
+        FROM sys_role_auth     sra
+                 JOIN sys_auth auth
+                      ON auth.sysAuthId = sra.sysAuthId
+        WHERE sra.sysRoleId IN (
+            SELECT sysRoleId
+            FROM sys_user_role
+            WHERE sysUserId = #{sysUserId}
+        ) AND url = #{url}
+    </select>
+
+    <select id="findBySysRoleId" resultMap="result">
+        SELECT
+            DISTINCT auth.*
+        FROM sys_role_auth     sra
+                 JOIN sys_auth auth
+                      ON auth.sysAuthId = sra.sysAuthId
+        WHERE sra.sysRoleId = #{sysRoleId}
+    </select>
+
+    <insert id="addAuth">
+        INSERT INTO sys_role_auth (sysRoleId, sysAuthId)
+        SELECT
+            #{sysRoleId},
+            #{sysAuthId}
+        FROM dual
+        WHERE NOT exists(
+                SELECT 0
+                FROM sys_role_auth
+                WHERE sysRoleId = #{sysRoleId}
+                    AND sysAuthId = #{sysAuthId}
+            )
+    </insert>
+
+    <delete id="delAuth">
+        DELETE
+        FROM sys_role_auth
+        WHERE sysAuthId = #{sysAuthId}
+            AND sysRoleId = #{sysRoleId}
+    </delete>
+
+</mapper>

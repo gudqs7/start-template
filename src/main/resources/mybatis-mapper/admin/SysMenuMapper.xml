@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.gudqs.system.admin.mapper.SysMenuMapper">
+
+    <resultMap id="result" type="cn.gudqs.system.admin.entity.SysMenuModel"/>
+
+    <select id="findAll" resultMap="result">
+        SELECT *
+        FROM sys_menu
+    </select>
+
+    <select id="findBySysUserId" resultMap="result">
+        SELECT
+            DISTINCT menu.*
+        FROM sys_role_menu role
+                 JOIN sys_menu menu
+                      ON menu.sysMenuId = role.sysMenuId
+        WHERE role.sysRoleId IN (
+            SELECT sysRoleId
+            FROM sys_user_role
+            WHERE sysUserId = #{sysUserId}
+        )
+        ORDER BY parentId, displayOrder DESC, sysMenuId
+    </select>
+    <select id="findBySysRoleId" resultMap="result">
+        SELECT
+            DISTINCT menu.*
+        FROM sys_role_menu     role
+                 JOIN sys_menu menu
+                      ON menu.sysMenuId = role.sysMenuId
+        WHERE role.sysRoleId = #{sysRoleId}
+        ORDER BY parentId, displayOrder DESC, sysMenuId
+    </select>
+
+    <insert id="addMenu">
+        INSERT INTO sys_role_menu (sysRoleId, sysMenuId)
+        SELECT #{sysRoleId}, #{sysMenuId}
+        FROM dual
+        WHERE NOT exists(
+                SELECT 0
+                FROM sys_role_menu
+                WHERE sysMenuId = #{sysMenuId}
+                    AND sysRoleId = #{sysRoleId}
+            )
+    </insert>
+
+    <delete id="delMenu">
+        DELETE
+        FROM sys_role_menu
+        WHERE sysMenuId = #{sysMenuId}
+            AND sysRoleId = #{sysRoleId}
+    </delete>
+
+</mapper>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Lay ui</title>
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <link rel="stylesheet" href="../res/css/app.css">
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo"><a style="color: #009688;" href="">Lay ui</a></div>
+        <ul class="layui-nav layui-layout-left">
+
+            <li class="layui-nav-item">
+                <a href="javascript:;">系统管理</a>
+                <dl class="layui-nav-child">
+                    <dd><a class="menu-url-item" data-url="userManage/userManage" href="javascript: void(0);">用户管理</a></dd>
+                    <dd><a class="menu-url-item" data-url="userAuth/userAuth" href="javascript: void(0);">角色管理</a></dd>
+                </dl>
+            </li>
+        </ul>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <a href="javascript: void(0);">
+                    <img onerror="this.src='http://t.cn/RCzsdCq'" src="http://t.cn/RCzsdCq" class="layui-nav-img admin-avatar">
+                    <span class="admin-nick-name">未登录</span>
+                </a>
+                <dl class="layui-nav-child">
+                    <dd><a class="refresh-version" href="javascript: void(0);">更新版本</a></dd>
+                    <dd><a class="menu-url-item" data-url="login/pwd" href="javascript: void(0);">修改密码</a></dd>
+                    <dd><a class="logout" style="color: #FF3D4B;" href="javascript: void(0);">安全退出</a></dd>
+                </dl>
+            </li>
+        </ul>
+    </div>
+
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <ul class="layui-nav layui-nav-tree admin-menu" lay-filter="main-menu">
+
+            </ul>
+        </div>
+    </div>
+
+    <div class="layui-body-wrapper">
+
+        <div class="layui-body"></div>
+    </div>
+
+</div>
+<script src="../layui/layui.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
