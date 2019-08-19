@@ -56,9 +56,9 @@ https://github.com/gudqs-architecture/start-template
 ├── src
 │   └── main
 │       ├── java
-│       │   └── com
-│       │       └── mountain
-│       │           ├── MountainApplication.java  #应用入口
+│       │   └── cn
+│       │       └── gudqs
+│       │           ├── MainApplication.java  #应用入口
 │       │           ├── business
 │       │           │   └── test  # 增删改查 demo
 │       │           ├── consts

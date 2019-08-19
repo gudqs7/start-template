@@ -3,7 +3,7 @@ spring:
     database: 0
     host: redis
     port: 6379
-    password: mountain372830
+    password: gudqs707redis
     jedis:
       pool:
         max-active: 300
