@@ -28,6 +28,8 @@ public class AdminInterceptor implements HandlerInterceptor {
 
     @Value("${project.env}")
     private String env;
+    @Value("${server.servlet.context-path}")
+    private String contextPath;
 
     private static final List<String> NO_AUTH_URLS = new ArrayList<>();
 
@@ -56,6 +58,10 @@ public class AdminInterceptor implements HandlerInterceptor {
                         int uid = Integer.parseInt(userId);
                         CommonUtil.setUserId(userId, request);
                         String url = request.getRequestURI();
+                        boolean notDefaultPath = !"/".equals(contextPath);
+                        if (notDefaultPath) {
+                            url = url.replace(contextPath, "");
+                        }
                         if (!NO_AUTH_URLS.contains(url)) {
                             boolean hasPermission = sysAuthService.hasPermission(uid, url);
                             if (!hasPermission) {
