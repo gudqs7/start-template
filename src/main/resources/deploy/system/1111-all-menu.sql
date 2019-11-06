@@ -21,7 +21,7 @@ CALL menuSimple('系统角色管理', 'userAuth/userAuth',
                 'find,update,add,delete', (SELECT sysMenuId FROM sys_menu WHERE menuText = '系统管理'), '/admin/role/');
 
 CALL onlyAuth((SELECT sysMenuId FROM sys_menu WHERE menuText = '系统角色管理'), 'findBySysUserId', '/admin/role/');
-CALL onlyAuth((SELECT sysMenuId FROM sys_menu WHERE menuText = '系统角色管理'), 'findMenu,findByRole', '/admin/auth/');
+CALL onlyAuth((SELECT sysMenuId FROM sys_menu WHERE menuText = '系统角色管理'), 'findMenu,findByRole,delMenu,addMenu,add,delete', '/admin/auth/');
 
 CALL menuSimple('微信关键词回复', 'wechatKeyword/wechatKeyword',
                 'find', (SELECT sysMenuId FROM sys_menu WHERE menuText = '常用'), '/admin/wechat/keyword/');
