@@ -33,5 +33,12 @@ CALL menuSimple('系统字典', 'sysDictionary/sysDictionary',
 CALL menuSimple('行政区域', 'region/region',
                 'find,update,add,delete', (SELECT sysMenuId FROM sys_menu WHERE menuText = '系统管理'), '/admin/sys/region/');
 
+INSERT sys_role_auth
+SELECT 1, sysAuthId
+FROM sys_auth;
+
+INSERT sys_role_menu
+SELECT 1, sysMenuId
+FROM sys_menu;
 -- first init end --
 
