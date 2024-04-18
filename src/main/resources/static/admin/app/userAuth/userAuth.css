@@ -1,0 +1,66 @@
+.user-wrapper {
+
+}
+
+.user-menu-operation {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.user-list {
+    margin-top: 7px;
+}
+
+.menu-list {
+    margin: 10px 25px;
+}
+
+.menu-list li {
+    margin-top: 10px;
+}
+
+.menu-list li .title, .menu-list li .menu-item {
+    top: 2px;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+}
+
+.menu-list li .operation-list {
+    margin: 5px 5px 5px 22px;
+    display: block;
+    overflow: hidden;
+}
+
+.menu-list li.close .operation-list, .menu-list li.close .menu-list {
+    display: none;
+}
+
+.operation-list li.active, .menu-list .menu-item.active {
+    background: #009688;
+    color: white;
+}
+
+.operation-list li {
+    float: left;
+    margin: 5px 5px;
+    padding: 3px 10px;
+    border: 1px solid #eeeeee;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.menu-list .menu-item {
+    padding: 3px 10px;
+    border: 1px solid #eeeeee;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+h5{
+    margin: 10px;
+    color: #ff9616;
+}
